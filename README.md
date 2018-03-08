@@ -1,1 +1,1 @@
-# Drupal8-Starter-Theme
+# Drupal8: Starter Theme
