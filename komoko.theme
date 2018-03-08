@@ -1,0 +1,94 @@
+<?php
+
+// Add your custom theme override functions here.
+
+/**
+ * Implements hook_preprocess_block()
+ */
+function komoko_preprocess_block(&$variables) {
+}
+
+/**
+ * Implements template_preprocess_field().
+ */
+function komoko_preprocess_field(&$variables) {
+}
+
+/**
+ * Implements template_preprocess_html().
+ *
+ * Adds additional classes
+ */
+function komoko_preprocess_html(&$variables) {
+}
+
+/**
+ * Implements template_preprocess_node
+ *
+ * Add template suggestions and classes
+ */
+function komoko_preprocess_node(&$variables) {
+}
+
+/**
+ * Implements template_preprocess_page
+ *
+ * Add convenience variables and template suggestions
+ */
+function komoko_preprocess_page(&$variables) {
+
+
+  $variables['site_name'] = \Drupal::config('system.site')->get('name');
+
+
+  // Create a Combined Mobile Menu
+//  $menus = array("main","top-navigation","social-networking-links");
+
+  $menus = array("main","top-navigation","social-navigation");
+
+
+
+  // kint($menus);
+
+  $combined_tree = array();
+  $menu_tree = \Drupal::menuTree();
+  $parameters = $menu_tree->getCurrentRouteMenuTreeParameters(trim($menus[0]));
+  $manipulators = array(
+    // Show links to nodes that are accessible for the current user.
+    array('callable' => 'menu.default_tree_manipulators:checkNodeAccess'),
+    // Only show links that are accessible for the current user.
+    array('callable' => 'menu.default_tree_manipulators:checkAccess'),
+    // Use the default sorting of menu links.
+    array('callable' => 'menu.default_tree_manipulators:generateIndexAndSort'),
+  );
+  // Force the entire tree to be build by setting expandParents to an
+  // empty array.
+  $parameters->expandedParents = array();
+  // Iterate over the menus and merge them together.
+  foreach($menus as $menu_name) {
+    $tree_items = $menu_tree->load(trim($menu_name), $parameters);
+
+    // kint($tree_items);
+    $tree_manipulated = $menu_tree->transform($tree_items, $manipulators);
+    $combined_tree = array_merge($combined_tree, $tree_manipulated);
+  }
+
+  $menu = $menu_tree->build($combined_tree);
+
+  $variables['mobile_menu'] = array(
+    // '#prefix' => '<div id="mobile-menu">',
+    // '#suffix' => '</div>',
+    '#markup' => \Drupal::service("renderer")->renderRoot($menu),
+  );
+
+
+
+}
+
+/**
+ * Implements template_preprocess_views_view().
+ */
+function komoko_preprocess_views_view(&$variables) {
+
+//  $variables['theme_path'] = base_path() . $variables['directory'];
+}

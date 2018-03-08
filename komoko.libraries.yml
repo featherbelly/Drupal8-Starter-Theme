@@ -1,0 +1,80 @@
+# https://www.drupal.org/docs/8/theming-drupal-8/adding-stylesheets-css-and-javascript-js-to-a-drupal-8-theme
+
+global:
+  version: VERSION
+  css:
+    base:
+      dist/assets/css/app.css: {}
+  js:
+    dist/assets/js/app.js: {}
+#    js/lodash.js: {}
+#    js/anime.min.js: { minified: true }
+#    /libraries/matchHeight/jquery.matchHeight-min.js: { minified: true }
+    # FontAwesome
+#    https://use.fontawesome.com/releases/v5.0.1/js/all.js : { type: external, minified: true }
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/modernizr
+    - core/jquery.once
+
+# External Fonts
+fonts:
+  css:
+    theme:
+      '//fonts.googleapis.com/css?family=Alegreya:400,400i|Work+Sans:300,400&amp;subset=latin-ext': { type: external, minified: true }
+
+#flickity
+flickity:
+  js:
+    js/lib/flickity.pkgd.min.js: { weight: -1, minified: true }
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+
+#slick
+slick:
+  js:
+    js/lib/slick.min.js: { weight: -1, minified: true }
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+
+
+# Project Gallery
+project_gallery:
+  version: 1.x
+  js:
+    js/project_gallery.js: {}
+  dependencies:
+    - komoko/slick
+
+# Global JS
+komoko_global:
+  version: 1.x
+  js:
+    js/global.js: {}
+
+# Test
+#test_js:
+#  version: 1.x
+#  js:
+#    js/test.js: {}
+
+
+#isotope
+isotope:
+  js:
+    js/lib/isotope.pkgd.min.js: { weight: -1, minified: true }
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+
+
+# Project Isotope
+projects_isotope:
+  version: 1.x
+  js:
+    js/projects_isotope.js: {}
+  dependencies:
+    - komoko/isotope

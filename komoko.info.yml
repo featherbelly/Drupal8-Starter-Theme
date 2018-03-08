@@ -1,0 +1,64 @@
+name: KOMOKO
+type: theme
+description: Custom theme using ZURB Foundation 6
+version: VERSION
+core: 8.x
+base theme: classy # stable #
+
+
+# Theme thumbnail
+# screenshot: images/screenshot.jpg
+
+
+libraries-override:
+#   Replace an entire library
+  #core/drupal.collapse: mytheme/collapsed
+#   Replace one particular library asset with another.
+  #subtheme/library/css/theme/css/layout.css: css/layout.css
+#   Remove one particular asset.
+  #drupal/dialog/css/theme/dialog.theme.css: false
+  # Remove menu.css from classy
+  classy/base:
+    css:
+      component:
+        css/components/menu.css: false
+        css/components/item-list.css: false
+
+# custom libraries: css, js, fonts
+libraries:
+ - komoko/global
+ - komoko/fonts
+
+ckeditor_stylesheets:
+- dist/assets/css/app.css
+
+# Regions are placed in page.html.twig
+
+regions:
+  offcanvasleft: Off-canvas Left
+  offcanvasright: Off-canvas Right
+#  navigation_top: Top Navigation
+  navigation: Main Navigation
+  branding: Logo & Branding
+  header: Header
+  help: Help
+  hero: Hero
+  breadcrumb: Breadcrumb
+  content: Content
+#  content_sub: Sub-Content
+  footer: Footer
+  
+regions_hidden:
+  page_top: 'Page Top'
+  page_bottom: 'Page bottom'
+
+# Theme features
+features:
+  - logo
+  - name
+  - slogan
+  - favicon
+  - comment_user_picture
+  - node_user_picture
+
+
